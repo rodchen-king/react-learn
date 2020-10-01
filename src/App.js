@@ -1,4 +1,6 @@
 import React from 'react';
+import ComponentBusiness from './ComponentBusiness'
+
 
 function App() {
   return (
@@ -8,6 +10,7 @@ function App() {
           Learn React
         </p>
       </header>
+    <ComponentBusiness />
     </div>
   );
 }
