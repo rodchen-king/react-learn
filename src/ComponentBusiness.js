@@ -13,7 +13,9 @@ class ComponentBusiness extends React.Component {
 
     return (
       <div className="App">
-        {this.props.children}
+        {this.props.left}
+        {this.props.right}
+
       </div>
     );
   }
