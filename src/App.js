@@ -10,7 +10,14 @@ function App() {
           函数组件
         </p>
       </header>
-    <ComponentBusiness />
+    <ComponentBusiness>
+      <h1 className="Dialog-title">
+        Welcome
+      </h1>
+      <p className="Dialog-message">
+        Thank you for visiting our spacecraft!
+      </p>
+    </ComponentBusiness>
     </div>
   );
 }
