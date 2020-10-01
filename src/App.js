@@ -7,7 +7,7 @@ function App() {
     <div className="App">
       <header className="App-header">
         <p>
-          Learn React
+          函数组件
         </p>
       </header>
     <ComponentBusiness />
