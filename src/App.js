@@ -10,13 +10,7 @@ function App() {
           函数组件
         </p>
       </header>
-    <ComponentBusiness 
-      left={
-        <span>left</span>
-      }
-      right={
-        <span>right</span>
-      } />
+      <ComponentBusiness />
     </div>
   );
 }

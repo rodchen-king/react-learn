@@ -1,28 +1,28 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 
 class ComponentBusiness extends React.Component {
-  constructor(props) {
-    super(props);
-
-    this.state = {value: ''};
+  state ={
+    theme: 'dark'
   }
-
-
   render() {
+    const { theme } = this.state;
 
-    return (
-      <div className="App">
-        {this.props.left}
-        {this.props.right}
-
-      </div>
-    );
+    return <Toolbar theme={theme} />;
   }
 }
 
-ComponentBusiness.propTypes = {
-  propersValue: PropTypes.string
+function Toolbar(props) {
+  return (
+    <div>
+      <ThemedButton theme={props.theme} />
+    </div>
+  );
+}
+
+class ThemedButton extends React.Component {
+  render() {
+    return <button>{this.props.theme}</button>;
+  }
 }
 
 export default ComponentBusiness;
