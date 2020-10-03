@@ -1,0 +1,14 @@
+.part {
+  height: 400px;
+  width: 400px;
+  border: 1px solid;
+  margin: 10px;
+}
+
+.hoc {
+  display: flex;
+}
+
+h2 {
+  text-align: center;
+}
