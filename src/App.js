@@ -1,5 +1,6 @@
 import React from 'react';
 import DataSource from './DataSource'
+import withSubscription from './withSubscription'
 import Comment from './Comment'
 import Article from './Article'
 
@@ -62,13 +63,23 @@ const dataSourceInit = (() => {
   }
 })()
 
+const CommentWithSubscription = withSubscription(
+  Comment,
+  (DataSource) => DataSource.getComments()
+);
+
+const ArticleWithSubscription = withSubscription(
+  Article,
+  (DataSource, props) => DataSource.getBlogPost(1)
+);
+
 function App() {
   return (
     <div className="App">
       <DataSource DataSource={dataSourceInit} />
       <div className="hoc">
-        <Comment DataSource={dataSourceInit} />
-        <Article DataSource={dataSourceInit} />
+        <CommentWithSubscription name="comment" DataSource={dataSourceInit} />
+        <ArticleWithSubscription name="article" DataSource={dataSourceInit} />
       </div>
     </div>
   );
