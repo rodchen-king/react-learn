@@ -75,13 +75,13 @@ const ArticleWithSubscription = withSubscription(
 
 function App() {
   return (
-    <div className="App">
+    <>
       <DataSource DataSource={dataSourceInit} />
       <div className="hoc">
         <CommentWithSubscription name="comment" DataSource={dataSourceInit} />
         <ArticleWithSubscription name="article" DataSource={dataSourceInit} />
       </div>
-    </div>
+    </>
   );
 }
 
