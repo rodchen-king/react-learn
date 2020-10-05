@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RefExample from './RefExample';
+import Portals from './Portals';
 
 ReactDOM.render(
   <React.StrictMode>
-    <RefExample />
+    <Portals />
   </React.StrictMode>,
   document.getElementById('root')
 );
