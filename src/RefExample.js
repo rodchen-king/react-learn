@@ -3,21 +3,12 @@ import "./index.css";
 
 //子组件
 class Child extends React.Component {
-  constructor(props) {
-    super(props);
-    this.textInput = null;
-    
-    this.inputRef = element => {
-      this.textInput  = element;
-    };
-  }
-
   handleFocusInput() {
-    this.textInput.focus();
+    this.refs.input.focus();
   }
 
   render() {
-    return <input ref={this.inputRef} />;
+    return <input ref='input' />;
   }
 }
 
