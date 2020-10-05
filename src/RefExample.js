@@ -1,22 +1,33 @@
 import React from "react";
-import './index.css';
+import "./index.css";
 
-//子组件（通过forwardRef方法创建）
-const Child=React.forwardRef((props,ref)=>(
-  <button ref={ref}>click me</button>
-));
+//子组件
+class Child extends React.Component {
+  constructor(props) {
+    super(props);
+    this.inputRef = React.createRef();
+  }
+
+  handleFocusInput() {
+    this.inputRef.current.focus();
+  }
+
+  render() {
+    return <input ref={this.inputRef} />;
+  }
+}
 
 //父组件
-class RefExample extends React.Component{
-  constructor(props){
+class RefExample extends React.Component {
+  constructor(props) {
     super(props);
-    this.myRef=React.createRef();
+    this.myRef = React.createRef();
   }
-  componentDidMount(){
-    console.log(this.myRef.current);
+  componentDidMount() {
+    this.myRef.current.handleFocusInput();
   }
-  render(){
-    return <Child ref={this.myRef}/>
+  render() {
+    return <Child ref={this.myRef} />;
   }
 }
 
