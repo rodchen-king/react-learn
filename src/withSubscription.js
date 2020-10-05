@@ -1,9 +1,9 @@
 import React from 'react'
 
 // 此函数接收一个组件...
-function withSubscription(WrappedComponent, selectData) {
+function WithSubscription(WrappedComponent, selectData) {
   // ...并返回另一个组件...
-  return class extends React.Component {
+  class WithSubscription extends React.Component {
     constructor(props) {
       super(props);
       this.handleChange = this.handleChange.bind(this);
@@ -30,9 +30,13 @@ function withSubscription(WrappedComponent, selectData) {
     render() {
       // ... 并使用新数据渲染被包装的组件!
       // 请注意，我们可能还会传递其他属性
-      return <WrappedComponent data={this.state.data} {...this.props} />;
+      return <WrappedComponent ref={this.props.forwardedRef} data={this.state.data} {...this.props} />;
     }
   };
+  debugger
+  return React.forwardRef((props, ref) => {
+    return <WithSubscription {...props} forwardedRef={ref} />;
+  });
 }
 
-export default withSubscription;
+export default WithSubscription;
