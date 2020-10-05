@@ -5,11 +5,15 @@ import "./index.css";
 class Child extends React.Component {
   constructor(props) {
     super(props);
-    this.inputRef = React.createRef();
+    this.textInput = null;
+    
+    this.inputRef = element => {
+      this.textInput  = element;
+    };
   }
 
   handleFocusInput() {
-    this.inputRef.current.focus();
+    this.textInput.focus();
   }
 
   render() {
