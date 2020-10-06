@@ -1,6 +1,7 @@
 /* eslint-disable no-script-url */
 /* eslint-disable jsx-a11y/anchor-is-valid */
 import React, { Component } from "react";
+import { BrowserRouter, Route, NavLink, Switch  } from "react-router-dom";
 
 class LifeCycle extends React.Component {
   constructor(props) {
@@ -29,9 +30,9 @@ class LifeCycle extends React.Component {
 
   componentDidMount() {
     console.log("parent componentDidMount");
-    // this.setState({
-    //   str: "str",
-    // });
+    this.setState({
+      str: "str",
+    });
   }
 
   shouldComponentUpdate(nextProps, nextState) {
@@ -207,4 +208,33 @@ class Message extends Component {
   }
 }
 
-export default LifeCycle;
+function index() {
+  return (
+    <div>home</div>
+  )
+}
+
+function AppRouter() {
+  return (
+    <BrowserRouter>
+        <div className="mainDiv">
+          <div className="leftNav">
+              <h3>一级导航</h3>
+              <ul>
+                  <li> <NavLink to="/home">博客首页</NavLink> </li>
+                  <li><NavLink activeClassName="active" to="/leftCycle/">lifeCycle</NavLink> </li>
+              </ul>
+          </div>
+          
+          <div className="rightMain">
+            <Switch>
+              <Route path="/home" exact component={index} />
+              <Route path="/leftCycle/" component={LifeCycle} />
+            </Switch>
+          </div>
+        </div>
+    </BrowserRouter>
+  );
+}
+
+export default AppRouter;
