@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import Portals from './Portals';
+import LifeCycle from './LifeCycle';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Portals />
+    <LifeCycle age={12} />
   </React.StrictMode>,
   document.getElementById('root')
 );
