@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LifeCycle from './LifeCycle';
+import RenderProps from './RenderProps';
 
 ReactDOM.render(
   <React.StrictMode>
-    <LifeCycle age={12} />
+    <RenderProps />
   </React.StrictMode>,
   document.getElementById('root')
 );
