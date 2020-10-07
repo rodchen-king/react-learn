@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import RenderProps from './RenderProps';
+import LifeCycle from './LifeCycle';
 
 ReactDOM.render(
   <React.StrictMode>
-    <RenderProps />
+    <LifeCycle />
   </React.StrictMode>,
   document.getElementById('root')
 );

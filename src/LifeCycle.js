@@ -122,11 +122,11 @@ class LifeCycle extends React.Component {
   }
 }
 
-class Message extends Component {
+class Message extends React.PureComponent {
   constructor(props) {
     super(props);
     console.log("child constructor");
-    this.state = { str: "hello", name: "rodchen" };
+    this.state = { str: {name: "hello"}, name: "rodchen" };
   }
 
   static getDerivedStateFromProps(nextProps, prevState) {
@@ -151,10 +151,10 @@ class Message extends Component {
     // });
   }
 
-  shouldComponentUpdate(nextProps, nextState) {
-    console.log("child shouldComponentUpdate");
-    return true; // 记得要返回true
-  }
+  // shouldComponentUpdate(nextProps, nextState) {
+  //   console.log("child shouldComponentUpdate");
+  //   return true; // 记得要返回true
+  // }
 
   getSnapshotBeforeUpdate(prevProps, prevState) {
     console.log("child getSnapshotBeforeUpdate");
@@ -179,12 +179,11 @@ class Message extends Component {
   }
 
   setTheState() {
-    let s = "hello";
-    if (this.state.str === s) {
-      s = "HELLO";
-    }
+    const nextState = this.state.str;
+    nextState.name = '23423';
+
     this.setState({
-      str: s,
+      str: nextState
     });
   }
 
@@ -201,7 +200,7 @@ class Message extends Component {
         </span>
         <br />
         <span>
-          State:<h2>{this.state.str}</h2>
+          State:<h2>{this.state.str.name}</h2>
         </span>
       </div>
     );
