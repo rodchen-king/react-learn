@@ -1,10 +1,10 @@
 import React from 'react';
 import ReactDOM from 'react-dom';
-import LifeCycle from './LifeCycle';
+import MyComponent from './lazy';
 
 ReactDOM.render(
   <React.StrictMode>
-    <LifeCycle />
+    <MyComponent />
   </React.StrictMode>,
   document.getElementById('root')
 );
