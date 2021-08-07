@@ -1,97 +1,37 @@
-import React from "react";
-import DataSource from "./DataSource";
-import WithSubscription from "./withSubscription";
-import Comment from "./Comment";
-import Article from "./Article";
+/*
+ * @Description: 
+ * @Author: rodchen
+ * @Date: 2020-11-19 22:42:01
+ * @LastEditTime: 2021-07-26 17:29:36
+ * @LastEditors: rodchen
+ */
+import React, {useState,useEffect} from 'react'
+import ReactDOM from 'react-dom'
 
-const dataSourceInit = (() => {
-  const comments = [];
-  let blogs = [
-    {
-      blogId: 1,
-      info: "文章",
-    },
-  ];
-  let subScripeFunctionList = [];
+export default class index extends React.Component{
+    state = { number:0 }
+    handerClick=()=>{
+        setTimeout(()=>{
+            this.setState({ number: 1  })
+        })
+        this.setState({ number: 2  })
+        ReactDOM.flushSync(()=>{
+            this.setState({ number: 3  })
+        })
+        new Promise((resolve) => {
+            resolve()
+        }).then(res => {
+            this.setState({ number: 5  })
+        })
+        this.setState({ number: 4  })
 
-  function addChangeListener(componentName, func) {
-    subScripeFunctionList.push({
-      key: componentName,
-      func,
-    });
-  }
+    }
 
-  function removeChangeListener(componentName) {
-    subScripeFunctionList = subScripeFunctionList.filter(
-      (item) => item.key !== componentName
-    );
-  }
-
-  function getComments() {
-    return comments;
-  }
-
-  function getBlogPost(blogId) {
-    return blogs.filter((item) => item.blogId === blogId)[0];
-  }
-
-  function addComment(comment) {
-    comments.push(comment);
-    subScripeFunctionList.forEach((item) => {
-      item.func();
-    });
-  }
-
-  function updateBlog(blogId, info) {
-    blogs = blogs.map((item) => {
-      if (item.blogId === blogId) {
-        item.info = info;
-      }
-
-      return item;
-    });
-
-    subScripeFunctionList.forEach((item) => {
-      item.func();
-    });
-  }
-
-  return {
-    addChangeListener,
-    removeChangeListener,
-    getComments,
-    getBlogPost,
-    addComment,
-    updateBlog,
-  };
-})();
-
-const CommentWithSubscription = WithSubscription(Comment, (DataSource) =>
-  DataSource.getComments()
-);
-
-const ArticleWithSubscription = WithSubscription(Article, (DataSource, props) =>
-  DataSource.getBlogPost(1)
-);
-
-class App extends React.Component {
-  constructor(props) {
-    super(props);
-    this.myRef = React.createRef();
-  }
-  componentDidMount() {
-    console.log(this.myRef.current);
-  }
-  render() {
-    return (
-      <>
-        <DataSource DataSource={dataSourceInit} />
-        <div className="hoc">
-          <CommentWithSubscription ref={this.myRef} name="comment" DataSource={dataSourceInit} />
+    render(){
+        console.log(this.state.number)
+        return <div>
+            { this.state.number }
+            <button onClick={ this.handerClick }  >number++</button>
         </div>
-      </>
-    );
-  }
-}
-
-export default App;
+    }
+} 
