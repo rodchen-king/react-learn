@@ -1,37 +1,63 @@
 /*
- * @Description: 
+ * @Description:
  * @Author: rodchen
- * @Date: 2020-11-19 22:42:01
- * @LastEditTime: 2021-07-26 17:29:36
+ * @Date: 2021-10-22 10:01:27
+ * @LastEditTime: 2022-03-12 15:25:25
  * @LastEditors: rodchen
  */
-import React, {useState,useEffect} from 'react'
-import ReactDOM from 'react-dom'
+import React, {
+  useState,
+  useEffect,
+  useRef,
+  useCallback,
+  useReducer,
+  memo,
+  useMemo,
+} from "react";
 
-export default class index extends React.Component{
-    state = { number:0 }
-    handerClick=()=>{
-        setTimeout(()=>{
-            this.setState({ number: 1  })
-        })
-        this.setState({ number: 2  })
-        ReactDOM.flushSync(()=>{
-            this.setState({ number: 3  })
-        })
-        new Promise((resolve) => {
-            resolve()
-        }).then(res => {
-            this.setState({ number: 5  })
-        })
-        this.setState({ number: 4  })
+function useDebounce(fn, delay) {
+  const { current } = useRef({ fn, timer: null });
+  useEffect(() => {
+    current.fn = fn;
+  }, []);
 
+  return useCallback((...args) => {
+    if (current.timer) {
+      clearTimeout(current.timer);
     }
 
-    render(){
-        console.log(this.state.number)
-        return <div>
-            { this.state.number }
-            <button onClick={ this.handerClick }  >number++</button>
-        </div>
-    }
-} 
+    current.timer = setTimeout(() => {
+      current.fn.apply(this, args);
+      current.timer = null;
+    }, delay);
+  }, []);
+}
+
+const Child = memo(({ userInfo }) => {
+  console.log("child render");
+
+  return <div>this is child</div>;
+});
+
+function App() {
+  const [element, setElement] = useState(0);
+  const [counter, setCounter] = useState(1);
+
+  useEffect(() => {
+    setCounter(counter + 1);
+  }, [element]);
+
+  return (
+    <div>
+      <div
+        ref={(input) => {
+          setElement(input);
+        }}
+      >
+        {counter}
+      </div>
+    </div>
+  );
+}
+
+export default App;
